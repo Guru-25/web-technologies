@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Gokul>
+    <Movies category="thriller">
+        <Movie>
+            <name>Billa 2</name>
+            <BoxOffice>789456123</BoxOffice>
+        </Movie>
+        <Movie>
+            <name>Billa 2</name>
+            <BoxOffice>789456123</BoxOffice>
+        </Movie>
+        <Movie>
+            <name>Billa 2</name>
+            <BoxOffice>789456123</BoxOffice>
+        </Movie>
+        <Movie>
+            <name>Billa 2</name>
+            <BoxOffice>789456123</BoxOffice>
+        </Movie>
+    </Movies>
+    <Movies category="horror">
+        <Movie>
+            <name>Conjuring</name>
+            <BoxOffice>123456</BoxOffice>
+        </Movie>
+        <Movie>
+            <name>Conjuring</name>
+            <BoxOffice>123456</BoxOffice>
+        </Movie>
+        <Movie>
+            <name>Conjuring</name>
+            <BoxOffice>123456</BoxOffice>
+        </Movie>
+        <Movie>
+            <name>Conjuring</name>
+            <BoxOffice>123456</BoxOffice>
+        </Movie>
+    </Movies>
+</Gokul>

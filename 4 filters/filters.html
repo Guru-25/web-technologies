@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AngularJS Filters Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="costCtrl">
+    <!-- Currency filter -->
+    <h1>Price: {{ price | currency:'INR' }}</h1>
+    
+    <!-- Date filter -->
+    <h1>Date: {{ today | date }}</h1>
+    
+    <!-- Uppercase filter -->
+    <h2>Fname: {{ fname | uppercase }}</h2>
+    <h2>Lname: {{ lname | uppercase }}</h2>
+</div>
+
+<script>
+    // Define the AngularJS application
+    var app = angular.module('myApp', []);
+
+    // Define the controller
+    app.controller('costCtrl', function($scope) {
+        // Initialize scope variables
+        $scope.price = 58;
+        $scope.today = new Date();
+        $scope.fname = "karthiga";
+        $scope.lname = "shankar";
+    });
+</script>
+
+</body>
+</html>

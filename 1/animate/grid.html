@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS Animation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-animate.min.js"></script>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Equal columns initially */
+            grid-template-rows: repeat(2, 100px);
+            gap: 0;
+        }
+
+        .box {
+            border: 1px solid black;
+            background-color: lightblue;
+            transition: width 0.3s ease-in-out;
+        }
+
+        /* Default box size */
+        .box {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Expanded box size */
+        .expanded {
+            grid-column: span 2; /* Makes the box span 2 columns */
+        }
+    </style>
+</head>
+<body ng-app="app" ng-controller="GridController">
+    <div class="grid-container">
+        <div class="box" ng-class="{'expanded': selectedBox === 1}" ng-click="toggleExpand(1)"></div>
+        <div class="box" ng-class="{'expanded': selectedBox === 2}" ng-click="toggleExpand(2)"></div>
+        <div class="box" ng-class="{'expanded': selectedBox === 3}" ng-click="toggleExpand(3)"></div>
+        <div class="box" ng-class="{'expanded': selectedBox === 4}" ng-click="toggleExpand(4)"></div>
+        <div class="box" ng-class="{'expanded': selectedBox === 5}" ng-click="toggleExpand(5)"></div>
+        <div class="box" ng-class="{'expanded': selectedBox === 6}" ng-click="toggleExpand(6)"></div>
+    </div>
+
+    <script>
+        angular.module('app', ['ngAnimate'])
+        .controller('GridController', function ($scope) {
+            $scope.selectedBox = null;
+
+            // Toggle expand/collapse
+            $scope.toggleExpand = function (boxNumber) {
+                $scope.selectedBox = $scope.selectedBox === boxNumber ? null : boxNumber;
+            };
+        });
+    </script>
+</body>
+</html>

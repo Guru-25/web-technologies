@@ -1,0 +1,34 @@
+<html ng-app="devi">
+    <head>
+        <script src="angular.min.js"></script>
+        <script src="devi.js"></script>
+    </head>
+    <body>
+        <input type="text" ng-model="search">
+        <input type="text" ng-model="num">
+        <div ng-controller="de">
+            <h1 ng-click="data(num)">{{num}}</h1>
+            <h1>{{numbe}}</h1>
+            <h1>{{loc}}</h1>
+            <h1 ng-repeat="i in message | filter:search">{{i}}</h1>
+            <h1 ng-repeat="j in mess | orderBy:'na' | filter:search" ng-click="remove(j) " ng-show="{{j.show}}">My name is {{j.na | uppercase}} age is {{j.age| currency:'#'}}</h1>
+            <form ng-submit="submit()">
+                <input type="text" ng-model="new.name">
+                <input type="text" ng-model="new.age">
+                <input type="submit">
+            </form>
+            <form ng-submit="addMovie()">
+                <input type="text" ng-model="newMovieName" placeholder="Movie Name">
+                <input type="number" ng-model="newMovieBoxOffice" placeholder="Box Office Collection">
+                <input type="submit" value="Add Movie">
+            </form>
+            <h1>{{Da}}</h1>
+            <h1>{{hel}}</h1>
+            <h1>{{ht}}</h1>
+            <h1 ng-repeat="movie in moo">{{movie.name}}</h1>
+        </div>
+        <div devi-rak>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,34 @@
+body{
+    padding:20px;
+    background-color: aqua;
+    align-items: center;
+}
+form{
+    max-width: 400px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: aliceblue;
+}
+
+form input{
+    border-radius: 5px;
+}
+
+button{
+    background-color: lawngreen;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover{
+    background-color: cornflowerblue;
+}
+table{
+    border-radius: 5px;
+    padding: 20px;
+}
+thead{
+    background-color: lawngreen;
+    
+}

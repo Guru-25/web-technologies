@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="goalApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Goal Manager</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- <script src="C:/Users/raaju/Downloads/angular-1.2.32/angular-1.2.32/angular.js"></script> -->
+    
+    <script src="app.js"></script>
+    <script src="services.js"></script>
+</head>
+<body ng-controller="GoalController">
+
+    <h1>Goals Manager</h1>
+
+    <!-- Input to add a new goal -->
+    <div>
+        <input type="text" ng-model="newGoalText" placeholder="Enter new goal">
+        <button ng-click="addGoal()">Add Goal</button>
+    </div>
+
+    <!-- Input to search/filter goals -->
+    <div>
+        <h3>Search Goals</h3>
+        <input type="text" ng-model="searchText" placeholder="Filter goals">
+    </div>
+
+    <!-- Displaying Goals with Filter -->
+    <ul>
+        <li ng-repeat="goal in goals | filter:searchText">
+            {{ goal.text }}
+            <button ng-click="deleteGoal(goal._id)">Delete</button>
+        </li>
+    </ul>
+
+</body>
+</html>

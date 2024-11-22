@@ -1,0 +1,75 @@
+<h3>NgDisabled</h3>
+<label>Click me to Enable the Button:
+<input type="checkbox"
+ng-model="checked"></label><br/>
+<button ng-model="button"
+ng-disabled="!checked">Button</button>
+
+<!DOCTYPE html>
+<html>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.mi
+n.js"></script>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+<p>Write something in the input field:</p>
+<input type="text" ng-change="myFunc()" ng-model="myValue" />
+<p>The input field has changed {{count}} times.</p>
+</div>
+<script>
+    angular.module('myApp', [])
+    .controller('myCtrl', ['$scope', function($scope) {
+    $scope.count = 0;
+    $scope.myFunc = function() {
+    $scope.count++;
+    };
+    }]);
+    </script>
+    </body>
+    </html>
+
+
+    <body ng-app="app">
+        <h2>ng-list Directive</h2>
+        <div ng-controller="ctrl">
+        <p>Enter Input: <input type="text" ng-model="list" ng-list="-"> </p>
+        {{list}} </div>
+        <script>
+        var app = angular.module("app", []);
+        app.controller('ctrl', ['$scope', function ($scope) {
+        $scope.list = [];
+        }]);
+        </script>
+        </body>
+
+
+        Ng-maxlength & minlength
+        <head>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.mi
+        n.js"></script>
+        <script>
+        var app = angular.module("myApp", []);
+        app.controller('myCtrl', function($scope) {
+        $scope.user = {
+        name: {
+        required: true,
+        minlength: 5,
+        maxlength: 25
+        }
+        }
+        }); </script></head>
+        <body ng-app="myApp" ng-controller="myCtrl">
+        <div>
+        <h3>Use of ng-minlength, ng-maxlength and ng-
+        required in AngularJs</h3></div>
+        <form name="form">
+        User Name *
+        <input type="text" name="name" ng-model="name"
+        ng-minlength='{{user.name.minlength}}‘
+        ng-maxlength="{{user.name.maxlength}}"
+        ng-required='user.name.required' />
+        <span ng-show="form.name.$error.required">Name is required!</span>
+        <span ng-show="form.name.$error.minlength">Input is too short!</span>
+        <span ng-show="form.name.$error.maxlength">Input is too long!</span>
+        </form>
+        </body>

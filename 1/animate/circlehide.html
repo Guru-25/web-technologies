@@ -1,0 +1,26 @@
+<html>
+<style>
+div {
+transition: 0.6s;
+border-radius: 500%;
+height: 250px;
+width: 250px;
+background-color: red;
+}
+.ng-hide {
+background-color: yellow;
+}
+</style>
+<script src=
+"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
+</script>
+<script src=
+"https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js">
+</script>
+<body ng-app="ngAnimate">
+<h1>Hide the Circle
+<input type="checkbox" ng-model="myCheck"></h1>
+<div ng-hide="myCheck"></div>
+</body>
+</html>
+

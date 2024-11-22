@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eventApp">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width , initial-scale=1.0">
+        <title> Form page</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+        <script src="app.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body ng-controller="eventController">
+        <h2> Event Form </h2>
+        <form ng-submit="addEvent()">
+            <label for="name"> Event Name </label><br>
+            <input id="name" type="text" ng-model="event.name"><br><br>
+            <label for="date"> Event Date </label><br>
+            <input id="date" type="date" ng-model="event.date"><br><br>
+            <label for="place"> Event Place </label><br>
+            <input id="place" type="text" ng-model="event.place"><br><br>
+            <label for="price"> Event Price </label><br>
+            <input id="price" type="number" ng-model="event.price"><br><br>
+            <button type="submit">Add Event </button>
+        </form>
+        <table border="1">
+            <thead>
+                <th> Event Name</th>
+                <th> Event date </th>
+                <th> Event place </th>
+                <th> Event price </th>
+                <th> Actions </th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="event in events">
+                    <td> {{event.name}}</td>
+                    <td> {{event.date | date: "yyyy-MM-dd"}}</td>
+                    <td> {{event.place}}</td>
+                    <td> {{event.price}}</td>
+                    <td> <button ng-click="edit(event)"> Edit</button><button ng-click="DeleteEvent(event._id)"> Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

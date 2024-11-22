@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML DTD Validation Example</title>
+</head>
+<body>
+    <h2>XML Validation Result</h2>
+    <div id="result"></div>
+
+    <script>
+        function validateXML(xmlContent, dtdContent) {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlContent, 'application/xml');
+            const dtdDoc = parser.parseFromString(dtdContent, 'application/xml');
+
+            const isValid = xmlDoc.documentElement.nodeName === 'parsererror' ? false : true;
+            return isValid;
+        }
+
+        fetch('books.dtd')
+            .then(response => response.text())
+            .then(dtdContent => {
+                fetch('books.xml')
+                    .then(response => response.text())
+                    .then(validXmlContent => {
+                        const isValid = validateXML(validXmlContent, dtdContent);
+                        document.getElementById('result').innerHTML = 
+                            isValid ? '<b>Valid XML (books.xml)</b>' : '<b>Invalid XML</b>';
+                    })
+                    .catch(error => {
+                        console.error('Error loading valid XML:', error);
+                        document.getElementById('result').innerHTML = 'Error loading valid XML.';
+                    });
+            })
+            .catch(error => {
+                console.error('Error loading DTD:', error);
+                document.getElementById('result').innerHTML = 'Error loading DTD.';
+            });
+    </script>
+</body>
+</html>

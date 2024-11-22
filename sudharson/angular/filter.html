@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>Filters</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="FilterController">
+  <p ng-bind="name | uppercase"></p>
+  <p ng-bind="price | currency"></p>
+  <script>
+    angular.module('myApp', [])
+      .controller('FilterController', ['$scope', function($scope) {
+        $scope.name = 'John Doe';
+        $scope.price = 123.45;
+      }]);
+  </script>
+</body>
+</html>

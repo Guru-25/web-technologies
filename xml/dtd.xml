@@ -1,0 +1,54 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>
+<!DOCTYPE address [
+<!ELEMENT address (name,company,phone)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT company (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+]>
+<address>
+<name>Tanmay Patil</name>
+<company>TutorialsPoint</company>
+<phone>(011) 123-4567</phone>
+</address>
+
+--
+node
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE BOOKLIST [
+  <!ELEMENT BOOKLIST (BOOK+)>
+  <!ELEMENT BOOK (AUTHOR)>
+  <!ELEMENT AUTHOR (FIRSTNAME, LASTNAME)>
+  <!ELEMENT FIRSTNAME (#PCDATA)>
+  <!ELEMENT LASTNAME (#PCDATA)>
+  <!ATTLIST BOOK GENRE (Science|Fiction) #REQUIRED>
+  <!ATTLIST BOOK FORMAT (Paperback|Hardcover) "Paperback">
+]>
+<BOOKLIST>
+  <BOOK GENRE="Science" FORMAT="Hardcover">
+    <AUTHOR>
+      <FIRSTNAME>RICHRD</FIRSTNAME>
+      <LASTNAME>KARTER</LASTNAME>
+    </AUTHOR>
+  </BOOK>
+</BOOKLIST>
+
+---
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE org [
+<!ELEMENT org (emp+)>
+<!ELEMENT emp (name, sal)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT sal (#PCDATA)>
+<!ATTLIST emp eid ID #REQUIRED>
+<!ATTLIST emp dept (IT | ECE | CSE) "IT">]>
+<org>
+  <emp eid="e1" dept="ECE">
+    <name>Raj</name>
+    <sal>2000</sal>
+  </emp>
+  <emp eid="e2" dept="IT">
+    <name>Jai</name>
+    <sal>3000</sal>
+  </emp>
+</org>

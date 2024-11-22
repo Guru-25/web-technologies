@@ -1,0 +1,239 @@
+<body ng-app="ngrepeatApp" ng-controller="ngrepeatCtrl">
+<h4>List of OS</h4>
+<ul>
+<li ng-repeat="x in names">{{x}}</li>
+</ul>
+<script>
+var app = angular.module("ngrepeatApp", []);
+app.controller("ngrepeatCtrl", function($scope) {
+$scope.names = [
+"Chrome",
+"Opera",
+"Android",
+"IOS",
+"Windows" ]
+});
+</script>
+
+<h4>OS List</h4>
+<table border="2">
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Category</th>
+<th>Quantity</th>
+</tr>
+<tr ng-repeat="x in os">
+<td>{{x.id}}</td>
+<td>{{x.product}}</td>
+<td>{{x.category}}</td>
+<td>{{x.quantity}}</td>
+</tr>
+</table>
+
+<script>
+var app = angular.module("ngrepeatApp", []);
+app.controller("ngrepeatCtrl", function($scope) {
+$scope.os = [
+{ id: 1, product: 'IOS', category: 'Mobile', quantity: '3' },
+{ id: 2, product: 'Android', category: 'Mobile', quantity: '10' },
+{ id: 3, product: 'Rice', category: 'System', quantity: '5' }];
+});
+</script>
+
+
+<body ng-app="myApp">
+<table ng-controller="myCtrl" border="1">
+<tr ng-repeat="(x, y) in myObj">
+<td>{{x}}</td>
+<td>{{y}}</td>
+</tr>
+</table>
+<script>
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope) {
+$scope.myObj = {
+"IOS" : "Apple",
+"Windows" : "OS",
+"Android" : "Mobile Os"
+}
+});
+</script></body>
+
+<div ng-app="myApp" ng-controller="namesCtrl">
+<p>Type a letter in the input field:</p>
+<input type ="text" ng-model="test">
+<ul>
+<li ng-repeat="x in names | filter:test">
+{{ x }}
+</li>
+</ul>
+</div>
+<script>
+angular.module('myApp', []).controller('namesCtrl', function($scope) {
+$scope.names = [
+'Apple',
+'Orange',
+'Ant',
+'Water',
+'Watch',
+'Red',
+'Register', ];
+}); </script>
+
+
+Example 1 - JS File
+var shopList= ["Biscuit","Cookies","Cake","Bread"];
+var shopListDetails= [
+{ name:"Biscuit", price:15},
+{ name:"Cookies", price:70},
+{ name:"Cake", price:25},
+{ name:"Bread", price:35} ];
+angular.module('repApp', [])
+.controller('repController', repController);
+repController.$inject = ['$scope'];
+function repController($scope) {
+$scope.shopList = shopList;
+$scope.shopListDetails = shopListDetails;
+}
+Example 1 - Html File
+<body>
+<div ng-controller = 'repController'>
+<h2>Shop List</h2>
+<ul>
+<li ng-repeat="item in shopList">{{item}}</li>
+</ul>
+<h2>Shop List Details</h2>
+<table border=1>
+<tr ng-repeat="item in shopListDetails“> <td>{{item.name}}</td>
+<td>{{item.price | currency : "INR" : 2}}</td></tr>
+</table>
+</div>
+</body>
+Output
+Example 2 – Binding with user input
+<body>
+<div ng-controller = 'repController'>
+<h2>Shop List</h2>
+<ul>
+<li ng-repeat="item in shopList">{{item}}</li>
+</ul>
+<input type="text" ng-model="shopListDetails[0].price">
+<h2>Shop List Details</h2>
+<table border=1>
+<tr ng-repeat="item in shopListDetails"><td>{{item.name}}</td>
+<td>{{item.price | currency : "INR" : 2}}</td></tr>
+</table>
+</div> </body>
+
+Example 3 – Adding rows
+function repController($scope) {
+$scope.shopList = shopList;
+$scope.shopListDetails = shopListDetails;
+$scope.addToTable = function(){
+var newItem = {
+name: $scope.newItemName,
+price: $scope.newItemPrice
+};
+$scope.shopListDetails.push(newItem);
+};
+}
+
+Example 3 - Html File
+<div><h3>Add item in table: </h3>
+<input type="text" ng-model="newItemName"
+placeholder="item name">
+<input type="text" ngmodel="newItemPrice"
+placeholder="item price"><br>
+<button ng-click="addToTable()">Add to Table</button>
+</div>
+<h2>Shop List Details</h2>
+<table border=1>
+<tr ng-repeat="item in shopListDetails"><td>{{item.name}}</td>
+<td>{{item.price | currency : "INR" : 2}}</td></tr>
+</table>
+</div>
+
+Example 4 - Indexing
+<h2>Shop List Details</h2>
+<table border=1>
+<tr ng-repeat="item in shopListDetails">
+<td>{{$index + 1}}</td>
+<td>{{item.name}}</td>
+<td>{{item.price | currency : "INR" : 2}}</td></tr>
+</table>
+</div>
+Problems
+1. Change price of the given item based on given
+index (Ex. Output)
+2. Change the currency type based on given option.
+DEMO
+
+<div ng-controller="repController">
+    <h2>Shop List</h2>
+    <ul>
+      <li ng-repeat="item in shopList">{{item}}</li>
+    </ul>
+  
+    <!-- Change Price of Item -->
+    <div>
+      <h3>Change Price of an Item</h3>
+      <input type="number" ng-model="itemIndex" placeholder="Enter Item Index" />
+      <input type="number" ng-model="newPrice" placeholder="Enter New Price" />
+      <button ng-click="changePrice()">Change Price</button>
+    </div>
+  
+    <!-- Select Currency -->
+    <div>
+      <h3>Select Currency</h3>
+      <select ng-model="currencyType">
+        <option value="INR">INR</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+      </select>
+    </div>
+  
+    <!-- Shop List Details -->
+    <h2>Shop List Details</h2>
+    <table border="1">
+      <tr>
+        <th>Index</th>
+        <th>Name</th>
+        <th>Price</th>
+      </tr>
+      <tr ng-repeat="item in shopListDetails">
+        <td>{{$index + 1}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.price | currency: currencyType: 2}}</td>
+      </tr>
+    </table>
+  </div>
+
+  var shopList = ["Biscuit", "Cookies", "Cake", "Bread"];
+  var shopListDetails = [
+    { name: "Biscuit", price: 15 },
+    { name: "Cookies", price: 70 },
+    { name: "Cake", price: 25 },
+    { name: "Bread", price: 35 },
+  ];
+  
+  angular.module("repApp", []).controller("repController", repController);
+  
+  repController.$inject = ["$scope"];
+  function repController($scope) {
+    $scope.shopList = shopList;
+    $scope.shopListDetails = shopListDetails;
+  
+    // Change Price of an Item
+    $scope.changePrice = function () {
+      if ($scope.itemIndex != null && $scope.itemIndex >= 0 && $scope.itemIndex < $scope.shopListDetails.length) {
+        $scope.shopListDetails[$scope.itemIndex].price = $scope.newPrice;
+      } else {
+        alert("Invalid Index");
+      }
+    };
+  
+    // Default currency type
+    $scope.currencyType = "INR";
+  }
+  

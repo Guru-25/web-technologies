@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="books.xsd">
+    <book>
+        <title>Learning XML</title>
+        <author>John Doe</author>
+        <price>29.99</price>
+    </book>
+    <book>
+        <title>XML in Action</title>
+        <author>Jane Smith</author>
+        <price>39.99</price>
+    </book>
+</books>

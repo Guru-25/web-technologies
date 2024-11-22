@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AngularJS Filters Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="listCtrl">
+    <!-- Filter the array to show only items with price greater than 50 -->
+    <h3>Filtered Items (Price > 50):</h3>
+    <ul>
+        <li ng-repeat="item in items | filter:priceFilter">
+            {{ item.name }} - {{ item.price | currency }}
+        </li>
+    </ul>
+
+    <!-- Order the array by name -->
+    <h3>Ordered Items by Name:</h3>
+    <ul>
+        <li ng-repeat="item in items | orderBy:'name'">
+            {{ item.name }} - {{ item.price | currency }}
+        </li>
+    </ul>
+
+    <!-- Custom filter to capitalize the first letter of each word -->
+    <h3>Items with Custom Capitalization:</h3>
+    <ul>
+        <li ng-repeat="item in items">
+            {{ item.name | capitalize }} - {{ item.price | currency }}
+        </li>
+    </ul>
+</div>
+
+<script>
+    // Define the AngularJS application
+    var app = angular.module('myApp', []);
+
+    // Define the controller
+    app.controller('listCtrl', function($scope) {
+        // Initialize an array of items
+        $scope.items = [
+            {name: 'apple', price: 30},
+            {name: 'banana', price: 60},
+            {name: 'cherry', price: 75},
+            {name: 'date', price: 45}
+        ];
+
+        // Define a filter function for price
+        $scope.priceFilter = function(item) {
+            return item.price > 50;
+        };
+    });
+
+    // Define a custom filter to capitalize the first letter of each word
+    app.filter('capitalize', function() {
+        return function(input) {
+            if (!input) return input;
+            return input.replace(/\b\w/g, function(txt) {
+                return txt.toUpperCase();
+            });
+        };
+    });
+</script>
+
+</body>
+</html>

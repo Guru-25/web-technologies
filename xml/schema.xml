@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shiporder orderid="889923" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <orderperson>John Smith</orderperson>
+    <shipto>
+        <name>Ola Nordmann</name>
+        <address>Langgt</address>
+        <city>Stavanger</city>
+        <country>Norway</country>
+    </shipto>
+    <item>
+        <title>Empire Burlesque</title>
+        <note>Special Edition</note>
+        <quantity>1</quantity>
+        <price>10.90</price>
+    </item>
+    <item>
+        <title>Hide your heart</title>
+        <quantity>1</quantity>
+        <price>9.90</price>
+    </item>
+</shiporder>
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           elementFormDefault="qualified">
+
+    <xs:element name="shiporder">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="orderperson" type="xs:string"/>
+                <xs:element name="shipto">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="name" type="xs:string"/>
+                            <xs:element name="address" type="xs:string"/>
+                            <xs:element name="city" type="xs:string"/>
+                            <xs:element name="country" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="item" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="title" type="xs:string"/>
+                            <xs:element name="note" type="xs:string" minOccurs="0"/>
+                            <xs:element name="quantity" type="xs:int"/>
+                            <xs:element name="price" type="xs:decimal"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="orderid" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+
+
+ALL
+<xs:element name="person">
+<xs:complexType>
+<xs:all>
+<xs:element name="firstname" type="xs:string"/>
+<xs:element name="lastname" type="xs:string"/>
+</xs:all>
+</xs:complexType>
+</xs:element>
+
+CHOICE
+<xs:element name="person">
+<xs:complexType>
+<xs:choice>
+<xs:element name="employee" type="employee"/>
+<xs:element name="member" type="member"/>
+</xs:choice>
+</xs:complexType>
+</xs:element>
+
+SEQUENCE
+<xs:element name="person">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="firstname" type="xs:string"/>
+<xs:element name="lastname" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+
+MAXOCCUR
+<xs:element name="person">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="full_name" type="xs:string"/>
+<xs:element name="child_name" type="xs:string"
+maxOccurs="10"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+
+MINOCCURS
+<xs:element name="person">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="full_name" type="xs:string"/>
+<xs:element name="child_name" type="xs:string"
+maxOccurs="10" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+
+RESTRICTIONS ON VALUES
+<xs:element name="age">
+<xs:simpleType>
+<xs:restriction base="xs:integer">
+<xs:minInclusive value="0"/>
+<xs:maxInclusive value="120"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+
+RESTRICTIONS ON A SERIES OF VALUES
+<xs:element name="letter">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:pattern value="[a-z]"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+
+<xs:element name="initials">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:pattern value="[A-Z][A-Z][A-Z]"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+
+<xs:element name="choice">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:pattern value="[xyz]"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+
+<xs:element name="password">
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:pattern value="[a-zA-Z0-9]{8}"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:element>
+
+EXTENSION
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Base Complex Type for Address -->
+  <xs:complexType name="AddressType">
+    <xs:sequence>
+      <xs:element name="Line1" type="xs:string" />
+      <xs:element name="Line2" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Extension for UK Address -->
+  <xs:complexType name="UKAddressType">
+    <xs:complexContent>
+      <xs:extension base="AddressType">
+        <xs:sequence>
+          <xs:element name="County" type="xs:string" />
+          <xs:element name="Postcode" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Extension for US Address -->
+  <xs:complexType name="USAddressType">
+    <xs:complexContent>
+      <xs:extension base="AddressType">
+        <xs:sequence>
+          <xs:element name="State" type="xs:string" />
+          <xs:element name="Zipcode" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Defining Root Element -->
+  <xs:element name="Addresses">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="UKAddress" type="UKAddressType"/>
+        <xs:element name="USAddress" type="USAddressType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
+
+ADDRESS.XML
+<?xml version="1.0" encoding="UTF-8"?>
+<Addresses>
+  <UKAddress>
+    <Line1>34 Thingy Street</Line1>
+    <Line2>Someplace</Line2>
+    <County>Somerset</County>
+    <Postcode>W1W8UU</Postcode>
+  </UKAddress>
+  <USAddress>
+    <Line1>234 Lancaster Av</Line1>
+    <Line2>Smallville</Line2>
+    <State>Florida</State>
+    <Zipcode>34543</Zipcode>
+  </USAddress>
+</Addresses>
+

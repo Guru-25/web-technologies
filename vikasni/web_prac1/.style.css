@@ -1,0 +1,32 @@
+body{
+    padding :20px;
+    background-color: aqua;
+    align-items: center;
+}
+
+form {
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+}
+
+form input{
+    border: 1px solid brown;
+    border-radius: 3px;
+}
+button{
+    border-radius: 4px;
+    background-color:lawngreen;
+    cursor: pointer;
+}
+button:hover{
+    background-color: cornflowerblue;
+}
+table{
+    border-radius: 5px;
+}
+th{
+    background-color: lawngreen;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My First AngularJS Application</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+
+    <h1>Example</h1>
+    <div>
+        <!-- Simple expression without AngularJS -->
+        Text: {{ 10 + 10 }}
+    </div>
+
+    <div ng-controller="HelloController">
+        <!-- Expression with AngularJS -->
+        <h2>Welcome to {{ helloTo.title }} Class!</h2>
+        
+        <!-- Two-way data binding example -->
+        <p>Enter your Name: <input type="text" ng-model="name"></p>
+        <!-- <p>Hello <span ng-bind="name"></span>!</p> -->
+        <p>Hello {{ name }}!</p>
+    </div>
+
+    <script>
+        // Define the AngularJS application
+        angular.module("myApp", [])
+        .controller("HelloController", function($scope) {
+            $scope.helloTo = "";
+            $scope.helloTo.title = "AngularJS";
+        });
+    </script>
+
+</body>
+</html>

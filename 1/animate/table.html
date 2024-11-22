@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="colorTableApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS Animated Table</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Base colors */
+        .morning { background-color: #FFDDC1; }
+        .lunch { background-color: #FFABAB; }
+        .afternoon { background-color: #FFC3A0; }
+        .evening { background-color: #D5AAFF; }
+
+        /* Hover animation */
+        .hover-animate {
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .hover-animate:hover {
+            transform: scale(1.1);
+            background-color: #A0E7E5; /* Light Blue on hover */
+        }
+
+        /* AngularJS Animations */
+        .animate-cell.ng-enter {
+            transition: all 0.5s ease-in;
+            transform: scale(0.8);
+            opacity: 0;
+        }
+
+        .animate-cell.ng-enter-active {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .animate-cell.ng-leave {
+            transition: all 0.5s ease-out;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .animate-cell.ng-leave-active {
+            transform: scale(0.8);
+            opacity: 0;
+        }
+    </style>
+</head>
+<body ng-controller="TableController">
+
+    <h1>AngularJS Animated Table</h1>
+
+    <table>
+        <tr>
+            <th></th>
+            <th></th>
+            <th colspan="3">Morning</th>
+            <th>Lunch</th>
+            <th colspan="4">Afternoon</th>
+            <th colspan="3">Evening</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>9-10am</td>
+            <td>10-11am</td>
+            <td>11-12am</td>
+            <td>1-2pm</td>
+            <td>2-3pm</td>
+            <td>3-4pm</td>
+            <td>4-5pm</td>
+            <td>5-6pm</td>
+            <td>6-7pm</td>
+            <td>7-8pm</td>
+            <td>8-9pm</td>
+        </tr>
+        <tr ng-repeat="row in scheduleRows">
+            <td>{{row.type}}</td>
+            <td>{{row.day}}</td>
+            <td class="morning hover-animate animate-cell">{{row.morning[0]}}</td>
+            <td class="morning hover-animate animate-cell">{{row.morning[1]}}</td>
+            <td class="morning hover-animate animate-cell">{{row.morning[2]}}</td>
+            <td class="lunch hover-animate animate-cell">{{row.lunch}}</td>
+            <td class="afternoon hover-animate animate-cell">{{row.afternoon[0]}}</td>
+            <td class="afternoon hover-animate animate-cell">{{row.afternoon[1]}}</td>
+            <td class="afternoon hover-animate animate-cell">{{row.afternoon[2]}}</td>
+            <td class="afternoon hover-animate animate-cell">{{row.afternoon[3]}}</td>
+            <td class="evening hover-animate animate-cell">{{row.evening[0]}}</td>
+            <td class="evening hover-animate animate-cell">{{row.evening[1]}}</td>
+            <td class="evening hover-animate animate-cell">{{row.evening[2]}}</td>
+        </tr>
+    </table>
+
+    <script>
+        // AngularJS Application with Animation Module
+        var app = angular.module('colorTableApp', ['ngAnimate']);
+
+        app.controller('TableController', function ($scope) {
+            $scope.scheduleRows = [
+                {
+                    type: 'Work',
+                    day: 'Monday',
+                    morning: ['Development', 'Meeting', 'Design'],
+                    lunch: 'Lunch Break',
+                    afternoon: ['Emails', 'Client Meeting', 'Reports', 'Commute'],
+                    evening: ['Relax', 'Dinner', 'Free']
+                },
+                {
+                    type: 'Lecture',
+                    day: 'Tuesday',
+                    morning: ['CSC205', 'Study', 'Prep'],
+                    lunch: 'Lunch Break',
+                    afternoon: ['Tutorial', 'Lab', 'Discussion', 'Commute'],
+                    evening: ['Relax', 'Dinner', 'Review']
+                }
+            ];
+        });
+    </script>
+</body>
+</html>

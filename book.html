@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bookstore XML Parsing</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        #demo1, #demo2, #demo3 {
+            margin: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+        #demo1 {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        #demo2 {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        #demo3 {
+            background-color: #d9edf7;
+            color: #31708f;
+            width: 50%;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="demo1"></h1>
+    <h1 id="demo2"></h1>
+    <div id="demo3"></div>
+
+    <script>
+        var text, parser, xmlDoc, i, txt="";
+        text = "<bookstore><book><title>Java</title><author>Schildt</author><year>2005</year></book>" +
+            "<book><title>C++</title><author>Balagurusamy</author><year>2002</year></book></bookstore>";
+        
+        parser = new DOMParser();
+        xmlDoc = parser.parseFromString(text, "text/xml");
+        
+        var c = xmlDoc.getElementsByTagName("bookstore")[0].childElementCount;
+        document.getElementById("demo1").innerHTML = "Number of books: " + c;
+        
+        document.getElementById("demo2").innerHTML = "Parent Node of 'book': " + xmlDoc.getElementsByTagName("book")[0].parentNode.nodeName;
+        
+        for (i = 0; i < c; i++) {
+            txt += "<strong>Title:</strong> " + xmlDoc.getElementsByTagName("title")[i].childNodes[0].nodeValue + "<br>" +
+                "<strong>Author:</strong> " + xmlDoc.getElementsByTagName("author")[i].childNodes[0].nodeValue + "<br>" +
+                "<strong>Year:</strong> " + xmlDoc.getElementsByTagName("year")[i].childNodes[0].nodeValue + "<hr>";
+        }
+        document.getElementById("demo3").innerHTML = txt;
+    </script>
+</body>
+</html>

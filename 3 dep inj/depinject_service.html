@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Dependency Injection Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body>
+
+<h3>Hi all</h3>
+<div ng-app="mainApp" ng-controller="DemoController">
+    <!-- Display the result of the addition -->
+    <p>Result: {{ result }}</p>
+</div>
+
+<script>
+    // Define the AngularJS application
+    var mainApp = angular.module("mainApp", []);
+
+    // Define a service for addition
+    mainApp.service('AdditionService', function() {
+        // Method to add two numbers
+        this.ADDITION = function(a, b) {
+            return a + b;
+        };
+    });
+
+    // Define the controller with dependency injection
+    mainApp.controller('DemoController', function($scope, AdditionService) {
+        // Use the service to calculate the result
+        $scope.result = AdditionService.ADDITION(5, 6);
+    });
+</script>
+
+</body>
+</html>

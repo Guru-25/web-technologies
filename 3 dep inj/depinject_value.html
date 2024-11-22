@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dependency Injection Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body ng-app="sampleApp">
+
+<div ng-controller="AngularJSController">
+    <h3>Hello all</h3>
+    <!-- Display the injected TutorialID -->
+    {{ ID }}
+</div>
+
+<script>
+    // Define the AngularJS application
+    var sampleApp = angular.module('sampleApp', []);
+
+    // Define a value service for dependency injection
+    sampleApp.value("TutorialID", 5);
+
+    // Define the controller with dependency injection
+    sampleApp.controller('AngularJSController', function($scope, TutorialID) {
+        // Assign the injected value to the scope variable
+        $scope.ID = TutorialID;
+    });
+</script>
+
+</body>
+</html>

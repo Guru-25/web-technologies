@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form Validation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="mycontroller">
+    <h2> Registration Form </h2>
+    <form name="regform" novalidate ng-submit="formSubmit()">
+        <div>
+            <label for="name">Name</label>
+            <input id="name" type="text" ng-model="user.name" required>
+            <span ng-show="regform.name.$touched && regform.name.$invalid">
+                The name field is wrong
+            </span>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" ng-model="user.email" required>
+            <span ng-show="regform.email.$touched && regform.email.$invalid">
+                The email field is wrong
+            </span>
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input id="password" type="password" ng-model="user.password" required>
+            <span ng-show="regform.password.$touched && regform.password.$invalid">
+                The password field is wrong
+            </span>
+        </div>
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+    </form>
+    <div ng-show="formSubmitted">
+        <p>The form is submitted successfully!</p>
+        <p>
+            Name: {{ user.name }}<br>
+            Email: {{ user.email }}
+        </p>
+    </div>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("mycontroller", function ($scope) {
+            $scope.user = {};
+            $scope.formSubmitted = false;
+
+            $scope.formSubmit = function () {
+                if ($scope.regform.$valid) {
+                    $scope.formSubmitted = true;
+                }
+            };
+        });
+    </script>
+</body>
+</html>

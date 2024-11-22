@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<style>
+ul li {
+list-style: none;
+display: inline-block;
+padding: 5px 15px;
+margin: 2px 0;
+background: orange;
+border-radius: 5px;
+}
+.course-container {
+position: relative;
+margin: 10px 20px;
+}
+.course-view.ng-animate {
+transition: all ease 0.4s;
+position: absolute;
+}
+.course-view.ng-enter {
+top: 200px;
+opacity: 2;
+}
+.course-view.ng-leave,
+.course-view.ng-enter.ng-enter-active {
+top: 0;
+opacity: 1;
+}
+.course-view.ng-leave.ng-leave-active {
+top: -200px;
+opacity: 0;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"
+></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-
+animate.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-
+route.js"></script>
+<body>
+<div ng-app="coursesApp">
+<script type="text/ng-template" id="a.html">
+<h2>Name of the Course: {{planet.name}}</h2>
+<p>Code: {{planet.code}}</p>
+<p>Semester: {{planet.sem}}</p>
+<p>Year: {{planet.year}}</p>
+</script>
+<h1>Courses in IT</h1>
+<ul>
+<li><a href="#!/web">Web Technologies</a></li>
+<li><a href="#!/DM">Data Mining</a></li>
+</ul>
+<div class="course-container">
+<div class="course-view" ng-view></div>
+</div>
+</div>
+</body>
+<script>
+var app = angular.module('coursesApp', ['ngRoute', 'ngAnimate']);
+app.config(function($routeProvider) {
+$routeProvider
+.when('/web', {
+templateUrl: "a.html",
+controller: "webCtrl"
+})
+.when('/DM', {
+templateUrl: "a.html",
+controller: "dmCtrl"
+})
+});
+app.controller("webCtrl", function($scope, $route) {
+$scope.planet = {
+name: 'Web Technologies',
+code: '18IT511',
+sem: '5',
+year: 'III year',
+}
+});
+app.controller("dmCtrl", function($scope, $route) {
+$scope.planet = {
+name: 'Data Mining',
+code: '18IT530',
+sem: '5',
+year: 'III Year'
+}
+});
+</script>

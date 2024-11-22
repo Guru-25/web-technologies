@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width,initial-scale=1.0">
+        <title> Shopping Cart </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+        <script>
+            var app=angular.module("myapp",[]);
+            app.service("cartservice",function(){
+                var cartItems=[];
+                this.getCartItems=function(){
+                    return cartItems;
+                };
+                this.addCartItems=function(product){
+                    cartItems.push(product);
+                };
+                this.removeCartItems=function(product){
+                    var index1=cartItems.indexOf(product);
+                    if(index1>-1){
+                    cartItems.splice(index1);}
+                };
+                this.totalCartCost=function(){
+                    var total=0;
+                    for(var i=0;i<cartItems.length;i++){
+                        total+=cartItems[i].price;
+                    }
+                    return total;
+                };
+            });
+            app.controller("myController",function($scope,cartservice){
+                $scope.products=[{"name":"Laptop","price":60000},
+                {"name":"SmartPhone","price":20000},
+                {"name":"Headphones","price":3000},
+                {"name":"Keyboard","price":1500},];
+
+                $scope.cart=cartservice.getCartItems();
+
+                $scope.addItems=function(product){
+                    cartservice.addCartItems(product);
+                };
+                $scope.removeItems=function(product){
+                    cartservice.removeCartItems(product);
+                };
+                $scope.total=function (){return cartservice.totalCartCost();};
+
+            });
+        </script>
+    </head>
+    <body ng-controller="myController">
+        <h2> Product List </h2>
+        <ul> 
+            <li ng-repeat="item in products"> {{item.name}} - {{item.price}} 
+                <button ng-click="addItems(item)">Add to cart </button>
+            </li>
+        </ul>
+        <h2> Cart List </h2>
+        <ul>
+            <li ng-repeat="item in cart">{{item.name}} - {{item.price}} 
+                <button ng-click="removeItems(item)">Remove from cart </button>
+            </li>
+        </ul>
+        <h3> Total : {{total()}}</h3>
+    </body>
+</html>

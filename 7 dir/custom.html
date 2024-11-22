@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ControllerAsApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List App with Factory</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <div id="list1" ng-controller='ShoppingListController1 as list1'>
+        <h3>Shopping List #1</h3>
+        <input type="text" ng-model="list1.itemName" placeholder="item name">
+        <input type="text" ng-model="list1.itemQuantity" placeholder="quantity">
+        <button ng-click="list1.addItem();">Add Item</button>
+        <ol>
+            <li ng-repeat="item in list1.items">
+                <list-item-descriptionn></list-item-descriptionn>
+                <button ng-click="list1.removeItem($index);">Remove Item</button>
+            </li>
+        </ol>
+        <div class="error">Error: {{list1.errorMessage}}</div>
+    </div>
+
+    <div id="list2" ng-controller='ShoppingListController2 as list2'>
+        <h3>Shopping List #2 (limited to 3 items)</h3>
+        <input type="text" ng-model="list2.itemName" placeholder="item name">
+        <input type="text" ng-model="list2.itemQuantity" placeholder="quantity">
+        <button ng-click="list2.addItem();">Add Item</button>
+        <ol>
+            <li ng-repeat="item in list2.items">
+                <list-item-description></list-item-description>
+                <button ng-click="list2.removeItem($index);">Remove Item</button>
+            </li>
+        </ol>
+        <div class="error">Error: {{list2.errorMessage}}</div>
+    </div>
+
+    <script>
+        angular.module('ControllerAsApp', [])
+        .controller('ShoppingListController1', ShoppingListController1)
+        .controller('ShoppingListController2', ShoppingListController2)
+        .factory('ShoppingListFactory', ShoppingListFactory)
+        .directive("listItemDescriptionn", ListItemDescriptionn);
+
+        function ListItemDescriptionn() {
+            var ddo = {
+                template: `{{item.quantity}} of {{item.name}}`
+            };
+            return ddo;
+        }
+
+        function ShoppingListFactory() {
+            var factory = function (maxItems) {
+                return new ShoppingListService(maxItems);
+            };
+            return factory;
+        }
+
+        function ShoppingListService(maxItems) {
+            var service = this;
+            var items = [];
+
+            service.addItem = function (itemName, quantity) {
+                if ((maxItems === undefined) || (maxItems !== undefined && items.length < maxItems)) {
+                    var item = { name: itemName, quantity: quantity };
+                    items.push(item);
+                } else {
+                    throw new Error("Max items (" + maxItems + ") reached.");
+                }
+            };
+
+            service.removeItem = function (itemIndex) {
+                items.splice(itemIndex, 1);
+            };
+
+            service.getItems = function () {
+                return items;
+            };
+        }
+
+        ShoppingListController1.$inject = ['ShoppingListFactory'];
+        function ShoppingListController1(ShoppingListFactory) {
+            var list1 = this;
+            var shoppingList = ShoppingListFactory();
+            list1.items = shoppingList.getItems();
+            list1.itemName = "";
+            list1.itemQuantity = "";
+            list1.addItem = function () {
+                shoppingList.addItem(list1.itemName, list1.itemQuantity);
+                list1.itemName = ""; // Clear input after adding
+                list1.itemQuantity = ""; // Clear input after adding
+            };
+            list1.removeItem = function (itemIndex) {
+                shoppingList.removeItem(itemIndex);
+            };
+        }
+
+        ShoppingListController2.$inject = ['ShoppingListFactory'];
+        function ShoppingListController2(ShoppingListFactory) {
+            var list2 = this;
+            var shoppingList = ShoppingListFactory(3);
+            list2.items = shoppingList.getItems();
+            list2.itemName = "";
+            list2.itemQuantity = "";
+            list2.addItem = function () {
+                try {
+                    shoppingList.addItem(list2.itemName, list2.itemQuantity);
+                    list2.itemName = ""; // Clear input after adding
+                    list2.itemQuantity = ""; // Clear input after adding
+                } catch (error) {
+                    list2.errorMessage = error.message;
+                }
+            };
+            list2.removeItem = function (itemIndex) {
+                shoppingList.removeItem(itemIndex);
+            };
+        }
+    </script>
+</body>
+</html>

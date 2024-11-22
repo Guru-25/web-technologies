@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Root element -->
+    <xs:element name="books">
+        <xs:complexType>
+            <xs:sequence>
+                <!-- Defining 'book' as a repeated element -->
+                <xs:element name="book" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <!-- 'title' as a simple element -->
+                            <xs:element name="title" type="xs:string"/>
+                            <!-- 'author' as a simple element -->
+                            <xs:element name="author" type="xs:string"/>
+                            <!-- 'price' as a simple element with a decimal type -->
+                            <xs:element name="price" type="xs:decimal"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
